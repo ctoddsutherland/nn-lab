@@ -1,8 +1,9 @@
 import './App.css'
 import { createNetwork, countParameters, getWeight, getBias } from './network/network'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 function App() {
+  const [seed, setSeed] = useState(0)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const layers2 = [3, 4, 1]
   const net = createNetwork(layers2)
@@ -75,7 +76,14 @@ function App() {
 
   }, [net])
 
-  return <canvas ref={canvasRef} width={rect.width} height={rect.height} />
+  return (
+    <div>
+      <button onClick={() => setSeed(seed + 1)}>New Network</button>
+      
+      <canvas ref={canvasRef} width={rect.width} height={rect.height} />
+    </div>
+  )
+
 }
 
 export default App 
